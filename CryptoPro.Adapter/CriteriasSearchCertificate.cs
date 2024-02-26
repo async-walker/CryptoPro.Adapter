@@ -1,5 +1,4 @@
-﻿using System.Collections.Specialized;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 
 namespace CryptoPro.Adapter.CryptCP
@@ -81,8 +80,6 @@ namespace CryptoPro.Adapter.CryptCP
 
         internal string ExecuteParams()
         {
-            var cmd = string.Empty;
-
             var criteriasCollection = new List<string>();
 
             if (StringsSearchRDN is not null && StringsSearchRDN.Count > 0)
@@ -106,7 +103,7 @@ namespace CryptoPro.Adapter.CryptCP
             if (ErrChain)
                 criteriasCollection.Add("-errchain");
 
-            cmd = string.Join(" ", criteriasCollection);
+            var cmd = string.Join(' ', criteriasCollection);
 
             return cmd;
         }
@@ -117,10 +114,12 @@ namespace CryptoPro.Adapter.CryptCP
             {
                 StoreLocation.CurrentUser => "-u",
                 StoreLocation.LocalMachine => "-m",
-                _ => throw new InvalidEnumArgumentException(""),
+                _ => throw new InvalidEnumArgumentException("Invalid StoreLocation enum"),
             };
 
-            var criteria = string.Join("", location, storeName);
+            var criteria = string.Join(
+                separator: string.Empty,
+                values: [location, storeName]);
 
             return criteria;
         }
