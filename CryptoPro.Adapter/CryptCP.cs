@@ -1,4 +1,5 @@
 ﻿using CryptoPro.Adapter.CryptCP.Extensions;
+using CryptoPro.Adapter.CryptCP.Types;
 
 namespace CryptoPro.Adapter.CryptCP
 {
@@ -19,20 +20,20 @@ namespace CryptoPro.Adapter.CryptCP
         }
 
         /// <inheritdoc/>
-        public Task DeleteSiganture()
+        public Task EncryptDataCreateMessage()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc/>
-        public Task Encrypt()
-        {
-            throw new NotImplementedException();
+        public Task DecryptMessageData() 
+        { 
+            throw new NotImplementedException(); 
         }
 
         /// <inheritdoc/>
         public Task<string> SignDataCreateMessage(
-            CriteriasSearchCertificate csc, 
+            CriteriasSearchCertificates csc, 
             bool der,
             string directoryToSave, 
             string sourceFilePath)
@@ -47,6 +48,18 @@ namespace CryptoPro.Adapter.CryptCP
                 value: [Path.Combine(directoryToSave, sourceFilePath), "sig"]);
 
             return Task.FromResult(createdSigFilePath);
+        }
+
+        /// <inheritdoc/>
+        public Task DeleteMessageSignature()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public Task VerifyMessageSignature()
+        {
+            throw new NotImplementedException();
         }
 
         static string UseDer(bool der)
