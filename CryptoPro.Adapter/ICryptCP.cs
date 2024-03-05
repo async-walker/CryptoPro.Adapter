@@ -20,7 +20,7 @@ namespace CryptoPro.Adapter.CryptCP
         /// <summary>
         /// Подпись данных и создание сообщения (-sign)
         /// </summary>
-        /// <param name="criterias">Критерии поиска сертификатов</param>
+        /// <param name="criterias">КПС автора подписи</param>
         /// <param name="der">Использовать формат DER вместо BASE64</param>
         /// <param name="directoryToSave">Директория, куда следует сохранить подписанное сообщение</param>
         /// <param name="sourceFilePath">Путь к исходному файлу</param>
@@ -38,7 +38,13 @@ namespace CryptoPro.Adapter.CryptCP
         /// <summary>
         /// Проверка подписи сообщения (-verify)
         /// </summary>
+        /// <param name="criterias">КПС авторов подписей</param>
+        /// <param name="sourceFilePath">Исходный файл, содержащий сообщение</param>
+        /// <param name="destinationFilePath">Файл, в который будут записаны данные из сообщения</param>
         /// <returns></returns>
-        Task VerifyMessageSignature();
+        Task VerifyMessageSignature(
+            CriteriasSearchCertificates criterias,
+            string sourceFilePath,
+            string destinationFilePath);
     }
 }

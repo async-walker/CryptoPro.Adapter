@@ -57,9 +57,17 @@ namespace CryptoPro.Adapter.CryptCP
         }
 
         /// <inheritdoc/>
-        public Task VerifyMessageSignature()
+        public Task VerifyMessageSignature(
+            CriteriasSearchCertificates csc,
+            string sourceFilePath,
+            string destinationFilePath)
         {
-            throw new NotImplementedException();
+            var criterias = csc.ExecuteParams();
+
+            var cmd = $@"{_config.PathExe} -verify {criterias} {sourceFilePath} {destinationFilePath}";
+            cmd.RunProcessCMD();
+
+            return Task.CompletedTask;
         }
 
         static string UseDer(bool der)
