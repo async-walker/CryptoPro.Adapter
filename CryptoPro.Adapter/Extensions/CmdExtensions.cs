@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Security;
 
 namespace CryptoPro.Adapter.CryptCP.Extensions
 {
@@ -10,10 +11,11 @@ namespace CryptoPro.Adapter.CryptCP.Extensions
             {
                 UseShellExecute = false,
                 FileName = "cmd.exe",
-                Arguments = "/c " + cmd,
+                Arguments = $"/c {cmd}",
                 CreateNoWindow = true,
+                RedirectStandardError = true,
                 RedirectStandardOutput = true,
-                WindowStyle = ProcessWindowStyle.Hidden
+                WindowStyle = ProcessWindowStyle.Hidden,
             };
 
             var process = new Process
@@ -28,6 +30,7 @@ namespace CryptoPro.Adapter.CryptCP.Extensions
             while (!process.StandardOutput.EndOfStream)
             {
                 var output = process.StandardOutput.ReadToEnd();
+
                 log += output;
             }
 
